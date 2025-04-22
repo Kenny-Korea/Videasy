@@ -31,6 +31,10 @@ const outputPathElement = document.getElementById("output-path");
 let currentVideoPath = null;
 let defaultOutputFilename = ""; // 기본 출력 파일명 저장
 
+// 현재 시간 설정 버튼
+const setStartTimeBtn = document.getElementById("set-start-time-btn");
+const setEndTimeBtn = document.getElementById("set-end-time-btn");
+
 // 시:분:초를 초로 변환하는 함수
 function convertToSeconds(hours, minutes, seconds) {
   return parseInt(hours) * 3600 + parseInt(minutes) * 60 + parseInt(seconds);
@@ -113,6 +117,27 @@ limitInputValue(startSecondsInput, 0, 59);
 limitInputValue(endHoursInput, 0, 99);
 limitInputValue(endMinutesInput, 0, 59);
 limitInputValue(endSecondsInput, 0, 59);
+
+// 현재 재생 시간을 가져와서 시작/종료 시간으로 설정하는 함수
+function setCurrentTimeAsStart() {
+  if (!videoPlayer.src) return;
+  
+  const currentTime = Math.floor(videoPlayer.currentTime);
+  startTimeInput.value = currentTime;
+  updateStartTimeFormat();
+}
+
+function setCurrentTimeAsEnd() {
+  if (!videoPlayer.src) return;
+  
+  const currentTime = Math.floor(videoPlayer.currentTime);
+  endTimeInput.value = currentTime;
+  updateEndTimeFormat();
+}
+
+// 현재 시간 버튼에 이벤트 리스너 추가
+setStartTimeBtn.addEventListener("click", setCurrentTimeAsStart);
+setEndTimeBtn.addEventListener("click", setCurrentTimeAsEnd);
 
 // 이벤트 리스너: 비디오 파일 선택 버튼
 selectVideoBtn.addEventListener("click", () => {

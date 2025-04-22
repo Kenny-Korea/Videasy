@@ -2,7 +2,18 @@ const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const ffmpeg = require("fluent-ffmpeg");
-const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
+// const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
+// console.log(ffmpegPath)
+
+const ffmpegInstaller = require('@ffmpeg-installer/ffmpeg');
+
+// 기본 경로
+let ffmpegPath = ffmpegInstaller.path;
+
+// app.asar가 경로에 포함되어 있으면 .unpacked로 경로 보정
+if (ffmpegPath.includes('app.asar')) {
+  ffmpegPath = ffmpegPath.replace('app.asar', 'app.asar.unpacked');
+}
 
 // ffmpeg 경로 설정
 // 개발 모드와 배포 모드에서 경로가 다름

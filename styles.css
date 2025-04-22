@@ -127,6 +127,17 @@ h2 {
   font-weight: bold;
 }
 
+.btn-time {
+  margin-left: 10px;
+  padding: 5px 10px;
+  font-size: 13px;
+  background-color: #3498db;
+}
+
+.btn-time:hover {
+  background-color: #2980b9;
+}
+
 /* 기존 시간 입력 스타일 */
 .time-inputs {
   display: flex;
