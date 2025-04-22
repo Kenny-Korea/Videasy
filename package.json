@@ -1,0 +1,64 @@
+{
+  "name": "videasy",
+  "version": "1.0.0",
+  "description": "FFmpeg GUI 비디오 편집기",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "NODE_ENV=development electron .",
+    "build": "electron-builder",
+    "build:mac": "electron-builder --mac",
+    "build:win": "electron-builder --win",
+    "build:linux": "electron-builder --linux",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "fluent-ffmpeg": "^2.1.3"
+  },
+  "devDependencies": {
+    "electron": "^35.2.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.Videasy.app",
+    "productName": "Videasy",
+    "extraResources": [
+      {
+        "from": "node_modules/@ffmpeg-installer/darwin-arm64/ffmpeg",
+        "to": "ffmpeg/darwin-arm64/ffmpeg"
+      }
+    ],
+    "asarUnpack": [
+      "node_modules/@ffmpeg-installer/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.video",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Video"
+    },
+    "files": [
+      "**/*",
+      "!build{,/**/*}"
+    ],
+    "asar": true
+  }
+}

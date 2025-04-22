@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>FFmpeg 비디오 편집기</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Videasy</h1>
+    <h2>FFmpeg 비디오 편집기</h2>
+
+    <div class="video-section">
+      <button id="select-video-btn" class="btn">비디오 파일 선택</button>
+      <div id="video-path" class="file-path">선택된 파일 없음</div>
+
+      <div id="video-player-container" class="hidden">
+        <video id="video-player" controls></video>
+      </div>
+    </div>
+
+    <div id="editor-section" class="editor-section hidden">
+      <h2>타임라인 설정</h2>
+
+      <!-- 시간/분/초 입력 폼 -->
+      <div class="time-format-inputs">
+        <div class="time-format-group">
+          <label>시작 시간 (시:분:초):</label>
+          <div class="time-format-controls">
+            <input type="number" id="start-hours" min="0" max="99" step="1" value="0" class="time-unit">
+            <span class="time-separator">:</span>
+            <input type="number" id="start-minutes" min="0" max="59" step="1" value="0" class="time-unit">
+            <span class="time-separator">:</span>
+            <input type="number" id="start-seconds" min="0" max="59" step="1" value="0" class="time-unit">
+          </div>
+        </div>
+
+        <div class="time-format-group">
+          <label>종료 시간 (시:분:초):</label>
+          <div class="time-format-controls">
+            <input type="number" id="end-hours" min="0" max="99" step="1" value="0" class="time-unit">
+            <span class="time-separator">:</span>
+            <input type="number" id="end-minutes" min="0" max="59" step="1" value="0" class="time-unit">
+            <span class="time-separator">:</span>
+            <input type="number" id="end-seconds" min="0" max="59" step="1" value="0" class="time-unit">
+          </div>
+        </div>
+      </div>
+
+      <div class="time-inputs">
+        <div class="time-input-group">
+          <label for="start-time">시작 시간 (초):</label>
+          <input type="number" id="start-time" min="0" step="1" value="0">
+        </div>
+
+        <div class="time-input-group">
+          <label for="end-time">종료 시간 (초):</label>
+          <input type="number" id="end-time" min="0" step="1" value="0">
+        </div>
+      </div>
+
+      <!-- 출력 파일명 입력 폼 -->
+      <div class="output-filename-container">
+        <label for="output-filename">출력 파일명:</label>
+        <input type="text" id="output-filename" class="output-filename-input" placeholder="기존파일명-cut">
+        <div class="filename-info">파일 확장자는 자동으로 추가됩니다.</div>
+      </div>
+
+      <button id="cut-video-btn" class="btn btn-primary">영상 자르기</button>
+    </div>
+
+    <div id="status-section" class="status-section">
+      <div id="status-message"></div>
+      <div id="output-path" class="file-path"></div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+
+</html>
